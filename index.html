@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in - Bloom Beauty Studio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">Bloom Beauty Studio</a>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="tabs" role="tablist">
+        <button type="button" id="tab-in" class="tab active" role="tab" aria-selected="true">Sign in</button>
+        <button type="button" id="tab-up" class="tab" role="tab" aria-selected="false">Sign up</button>
+      </div>
+
+      <div id="message" class="msg" role="alert" hidden></div>
+
+      <form id="form-in" novalidate>
+        <label for="in-email">Email</label>
+        <input id="in-email" type="email" autocomplete="username" inputmode="email" required>
+
+        <label for="in-password">Password</label>
+        <input id="in-password" type="password" autocomplete="current-password" required>
+
+        <button type="submit" class="btn btn-block">Sign in</button>
+      </form>
+
+      <form id="form-up" novalidate hidden>
+        <label for="up-name">Full name</label>
+        <input id="up-name" type="text" autocomplete="name" maxlength="80" required>
+
+        <label for="up-email">Email</label>
+        <input id="up-email" type="email" autocomplete="username" inputmode="email" required>
+
+        <label for="up-password">Password</label>
+        <input id="up-password" type="password" autocomplete="new-password" required>
+        <small class="muted">At least 8 characters.</small>
+
+        <label for="up-confirm">Confirm password</label>
+        <input id="up-confirm" type="password" autocomplete="new-password" required>
+
+        <button type="submit" class="btn btn-block">Create account</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">Bloom Beauty Studio</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
