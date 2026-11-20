@@ -1,3 +1,5 @@
+// Shared helpers used by every page.
+
 const HOME = { owner: "owner.html", stylist: "stylist.html", client: "client.html" };
 
 function configOk() {
@@ -15,7 +17,7 @@ async function getProfile() {
   if (!user) return null;
   const { data, error } = await sb
     .from("profiles")
-    .select("id, full_name, role")
+    .select("id, full_name, role, phone")
     .eq("id", user.id)
     .maybeSingle();
   if (error) {
@@ -25,34 +27,40 @@ async function getProfile() {
   return data;
 }
 
-// Guards a role page. This only controls what the page shows; the real protection
-// of data is the Row Level Security in the database.
+// Guards a role page and returns the signed-in profile (or null if the visitor was sent away).
+// This only controls what the page shows; the real protection of data is the
+// Row Level Security in the database.
 async function initRolePage(role) {
   const loading = document.getElementById("loading");
   const page = document.getElementById("page");
 
   document.getElementById("signout").addEventListener("click", async () => {
     if (sb) await sb.auth.signOut();
-    location.replace("index.html");
+    location.replace("signin.html");
   });
 
   if (!sb) {
     loading.textContent = "Setup needed: add your Supabase details to config.js.";
-    return;
+    return null;
   }
 
   const { data: { session } } = await sb.auth.getSession();
-  if (!session) return location.replace("index.html");
+  if (!session) { location.replace("signin.html"); return null; }
 
   const profile = await getProfile();
   if (!profile) {
     await sb.auth.signOut();
-    return location.replace("index.html");
+    location.replace("signin.html");
+    return null;
   }
 
-  if (profile.role !== role) return location.replace(HOME[profile.role] || "index.html");
+  if (profile.role !== role) {
+    location.replace(HOME[profile.role] || "signin.html");
+    return null;
+  }
 
   document.getElementById("welcome").textContent = profile.full_name || "there";
   loading.hidden = true;
   page.hidden = false;
+  return profile;
 }

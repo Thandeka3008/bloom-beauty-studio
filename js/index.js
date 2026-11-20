@@ -102,8 +102,8 @@ formUp.addEventListener("submit", async (e) => {
 (async () => {
   if (!sb) {
     showMessage("Setup needed: add your Supabase details to config.js.");
-    formIn.querySelector("button").disabled = true;
-    formUp.querySelector("button").disabled = true;
+    formIn.querySelector("button[type=submit]").disabled = true;
+    formUp.querySelector("button[type=submit]").disabled = true;
     return;
   }
   const { data: { session } } = await sb.auth.getSession();
@@ -112,3 +112,16 @@ formUp.addEventListener("submit", async (e) => {
     if (profile) location.replace(HOME[profile.role] || "client.html");
   }
 })();
+
+// Show / hide password buttons
+document.querySelectorAll(".pw-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.target);
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    btn.setAttribute("aria-pressed", String(show));
+    btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+  });
+});
+
+   

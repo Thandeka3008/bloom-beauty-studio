@@ -3,29 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Owner dashboard - Bloom Beauty Studio</title>
+  <title>Owner - Bloom Beauty Studio</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="owner.html">Bloom Beauty Studio</a>
-    <nav><button type="button" id="signout" class="link">Sign out</button></nav>
-  </header>
+  <div class="frame frame-top">
+    <main class="stage stage-wide">
+      <header class="bar">
+        <span class="bar-brand">Bloom Beauty Studio</span>
+        <button type="button" id="signout" class="link">Sign out</button>
+      </header>
 
-  <main class="container">
-    <section class="card" id="page" hidden>
-      <h1>Owner dashboard</h1>
-      <p>Welcome, <span id="welcome"></span>.</p>
-      <p class="muted">Signed in as <strong>Owner</strong>. Features for this role will appear here.</p>
-    </section>
-    <p id="loading" class="muted">Loading...</p>
-  </main>
+      <p id="loading" class="muted">Loading...</p>
 
-  <footer class="footer">Bloom Beauty Studio</footer>
+      <div id="page" hidden>
+        <section class="card">
+          <h1>Hello, <span id="welcome"></span></h1>
+          <div class="stats">
+            <div class="stat"><strong id="stat-today">0</strong><span>appointments today</span></div>
+            <div class="stat"><strong id="stat-income">R0</strong><span>earned today</span></div>
+            <div class="stat"><strong id="stat-requests">0</strong><span>new requests</span></div>
+            <div class="stat"><strong id="stat-month">R0</strong><span>earned this month</span></div>
+            <div class="stat"><strong id="stat-deposits">R0</strong><span>deposits this month</span></div>
+          </div>
+          <button type="button" id="refresh" class="link">Refresh</button>
+        </section>
+
+        <div id="owner-msg" class="msg" role="alert" hidden></div>
+
+        <section class="card">
+          <div class="tabs owner-tabs" role="tablist">
+            <button type="button" class="tab active" data-tab="requests" role="tab">Requests</button>
+            <button type="button" class="tab" data-tab="upcoming" role="tab">Upcoming</button>
+            <button type="button" class="tab" data-tab="history" role="tab">History</button>
+            <button type="button" class="tab" data-tab="clients" role="tab">Clients</button>
+          </div>
+          <div id="list"><p class="muted">Loading...</p></div>
+        </section>
+      </div>
+    </main>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="config.js"></script>
   <script src="js/app.js"></script>
-  <script>initRolePage("owner");</script>
+  <script src="js/owner.js"></script>
+  <script>initRolePage("owner").then((profile) => { if (profile) startOwner(profile); });</script>
 </body>
 </html>

@@ -7,25 +7,73 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="client.html">Bloom Beauty Studio</a>
-    <nav><button type="button" id="signout" class="link">Sign out</button></nav>
-  </header>
+  <div class="frame frame-top">
+    <main class="stage stage-wide">
+      <header class="bar">
+        <span class="bar-brand">Bloom Beauty Studio</span>
+        <button type="button" id="signout" class="link">Sign out</button>
+      </header>
 
-  <main class="container">
-    <section class="card" id="page" hidden>
-      <h1>My bookings</h1>
-      <p>Welcome, <span id="welcome"></span>.</p>
-      <p class="muted">Signed in as <strong>Client</strong>. Features for this role will appear here.</p>
-    </section>
-    <p id="loading" class="muted">Loading...</p>
-  </main>
+      <p id="loading" class="muted">Loading...</p>
 
-  <footer class="footer">Bloom Beauty Studio</footer>
+      <div id="page" hidden>
+        <section class="card">
+          <h1>Book an appointment</h1>
+          <p class="muted">Welcome, <span id="welcome"></span>. Pick a service and a time, pay your deposit, and Bloom will confirm your booking.</p>
+
+          <div id="book-msg" class="msg" role="alert" hidden></div>
+
+          <form id="book-form" novalidate>
+            <label for="service">Service</label>
+            <select id="service" required></select>
+
+            <label for="date">Date</label>
+            <input id="date" type="date" required>
+
+            <label>Time</label>
+            <div id="slots" class="slots" aria-live="polite">
+              <p class="muted">Choose a service and a date to see the times.</p>
+            </div>
+
+            <div id="deposit-step" class="deposit-step" hidden>
+              <label>How much deposit are you paying?</label>
+              <p id="deposit-hint" class="muted"></p>
+              <div id="amounts" class="slots"></div>
+
+              <p class="bank-title">Pay by EFT to:</p>
+              <p id="bank" class="bank"></p>
+
+              <label for="pop">Proof of payment (photo or PDF)</label>
+              <input id="pop" type="file" accept="image/*,application/pdf">
+            </div>
+
+            <label for="phone">Phone / WhatsApp number</label>
+            <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567">
+
+            <label for="notes">Design notes (optional)</label>
+            <textarea id="notes" rows="3" maxlength="500" placeholder="Colour, shape, any design ideas"></textarea>
+
+            <label for="photo">Reference photo (optional)</label>
+            <input id="photo" type="file" accept="image/*">
+
+            <p id="summary" class="summary" hidden></p>
+
+            <button type="submit" class="btn btn-block">Request booking</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>My bookings</h2>
+          <div id="my-bookings"><p class="muted">Loading...</p></div>
+        </section>
+      </div>
+    </main>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="config.js"></script>
   <script src="js/app.js"></script>
-  <script>initRolePage("client");</script>
+  <script src="js/client.js"></script>
+  <script>initRolePage("client").then((profile) => { if (profile) startClient(profile); });</script>
 </body>
 </html>

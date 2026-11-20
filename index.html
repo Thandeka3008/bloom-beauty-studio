@@ -3,57 +3,171 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign in - Bloom Beauty Studio</title>
+  <title>Bloom Beauty Studio - Nails in Johannesburg</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Welcome page only */
+    .welcome { padding-bottom: 2rem; }
+    .w-top { display: flex; justify-content: flex-end; width: 100%; padding: .25rem 0 0; }
+    .w-hero { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .w-tagline { margin: -.25rem 0 1.1rem; color: var(--muted); font-size: 1rem; max-width: 22rem; }
+    .w-actions { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; width: 100%; }
+    .w-actions .btn { min-width: 9rem; text-align: center; text-decoration: none; }
+    .btn-outline { color: var(--accent); background: #ffffff; }
+    .btn-outline:hover { color: #ffffff; }
+
+    .w-section { width: 100%; margin-top: 1.5rem; }
+    .w-section h2 {
+      margin: 0 0 .75rem;
+      text-align: center;
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: 2.3rem;
+      line-height: 1.1;
+      color: var(--accent);
+    }
+
+    .steps { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      display: flex; gap: .75rem; align-items: flex-start;
+      padding: .75rem .9rem;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .steps li::before {
+      content: counter(step);
+      flex: none;
+      width: 1.9rem; height: 1.9rem;
+      display: grid; place-items: center;
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(180deg, #e3c47e, #b8862f);
+      border-radius: 50%;
+    }
+    .steps strong { display: block; }
+    .steps span { color: var(--muted); font-size: .9rem; }
+
+    .price-card { margin-bottom: .75rem; padding: 1rem 1.1rem; }
+    .price-card h3 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 1.1rem; color: var(--text); }
+    .price-card p { margin: .1rem 0 .6rem; }
+    .price-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; text-align: center; }
+    .price-row div { padding: .45rem .25rem; background: #fff8ec; border: 1px solid #f1e3c8; border-radius: 10px; }
+    .price-row small { display: block; color: var(--muted); font-size: .78rem; }
+    .price-row b { font-family: "Playfair Display", Georgia, serif; font-size: 1.15rem; color: var(--gold); }
+
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+    .g-tile {
+      margin: 0;
+      padding: .6rem .5rem .5rem;
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .g-tile svg { display: block; width: 100%; height: auto; }
+    .g-tile img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+    .g-tile figcaption { margin-top: .35rem; font-size: .85rem; color: var(--muted); }
+
+    .info { display: grid; gap: .5rem; }
+    .info p { margin: 0; }
+    .info .label { display: block; font-weight: 600; font-size: .85rem; color: var(--muted); }
+    .w-foot { margin-top: 1.5rem; text-align: center; font-family: "Great Vibes", cursive; font-size: 1.4rem; color: var(--accent); }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html">Bloom Beauty Studio</a>
-  </header>
+  <div class="frame frame-top">
+    <main class="stage welcome">
+      <div class="w-top"><a class="link" href="signin.html">Sign in</a></div>
 
-  <main class="container">
-    <section class="card">
-      <div class="tabs" role="tablist">
-        <button type="button" id="tab-in" class="tab active" role="tab" aria-selected="true">Sign in</button>
-        <button type="button" id="tab-up" class="tab" role="tab" aria-selected="false">Sign up</button>
-      </div>
+      <section class="w-hero">
+       <h1 class="logo logo-sm"><img src="images/logo.jpeg" alt="Bloom Beauty Studio"></h1>
 
-      <div id="message" class="msg" role="alert" hidden></div>
+        <p class="w-tagline">Beautiful nails, done with care. Book your appointment online in a few minutes.</p>
+        <div class="w-actions">
+          <a class="btn" href="signin.html">Book now</a>
+          <a class="btn btn-outline" href="#prices">See prices</a>
+        </div>
+      </section>
 
-      <form id="form-in" novalidate>
-        <label for="in-email">Email</label>
-        <input id="in-email" type="email" autocomplete="username" inputmode="email" required>
+      <section class="w-section">
+        <h2>How booking works</h2>
+        <ol class="steps">
+          <li><div><strong>Choose your service and time</strong><span>Only free times can be picked.</span></div></li>
+          <li><div><strong>Pay your deposit</strong><span>Pay by EFT and upload your proof of payment.</span></div></li>
+          <li><div><strong>Bloom confirms</strong><span>You see the confirmation under My bookings.</span></div></li>
+        </ol>
+      </section>
 
-        <label for="in-password">Password</label>
-        <input id="in-password" type="password" autocomplete="current-password" required>
+      <section class="w-section" id="prices">
+        <h2>Prices</h2>
+        <div class="card price-card">
+          <h3>Combo 1</h3>
+          <p class="muted">Mani French and pedi</p>
+          <div class="price-row">
+            <div><small>Short</small><b>R200</b></div>
+            <div><small>Medium</small><b>R250</b></div>
+            <div><small>Long</small><b>R300</b></div>
+          </div>
+        </div>
+        <div class="card price-card">
+          <h3>Bestie Combo</h3>
+          <p class="muted">Mani French and pedi</p>
+          <div class="price-row">
+            <div><small>Short</small><b>R300</b></div>
+            <div><small>Medium</small><b>R400</b></div>
+            <div><small>Long</small><b>R500</b></div>
+          </div>
+        </div>
+        <div class="card price-card">
+          <h3>Plain Set</h3>
+          <p class="muted">A clean, classic set</p>
+          <div class="price-row">
+            <div><small>Short</small><b>R150</b></div>
+            <div><small>Medium</small><b>R200</b></div>
+            <div><small>Long</small><b>R250</b></div>
+          </div>
+        </div>
+        <p class="muted" style="text-align:center;margin:.25rem 0 0">Special designs may cost more. Bloom confirms the final price.</p>
+      </section>
 
-        <button type="submit" class="btn btn-block">Sign in</button>
-      </form>
+      <section class="w-section">
+        <h2>Gallery</h2>
+       <div class="gallery">
+          <figure class="g-tile"><img data-name="gallery1" alt=""></figure>
+          <figure class="g-tile"><img data-name="gallery2" alt=""></figure>
+          <figure class="g-tile"><img data-name="gallery3" alt=""></figure>
+          <figure class="g-tile"><img data-name="gallery4" alt=""></figure>
+        </div>
+        <script>
+          // Finds each photo whatever its file ending, and hides any box with no photo
+          document.querySelectorAll(".g-tile img[data-name]").forEach((img) => {
+            const endings = ["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG", "jpg.jpg", "jpeg.jpg", "png.png"];
+            let i = 0;
+            const tryNext = () => {
+              if (i < endings.length) img.src = "images/" + img.dataset.name + "." + endings[i++];
+              else img.closest(".g-tile").hidden = true;
+            };
+            img.onerror = tryNext;
+            tryNext();
+          });
+        </script>
+      </section>
 
-      <form id="form-up" novalidate hidden>
-        <label for="up-name">Full name</label>
-        <input id="up-name" type="text" autocomplete="name" maxlength="80" required>
+      <section class="w-section">
+        <h2>Visit us</h2>
+        <div class="card info">
+          <p><span class="label">Opening hours</span>Monday to Saturday, 09:00 to 17:00. Closed on Sundays.</p>
+          <p><span class="label">Address</span><a href="https://www.google.com/maps/search/?api=1&query=289+Fox+Street+Maboneng+Lifestyle+Centre+Johannesburg" target="_blank" rel="noopener">289 Fox Street, Maboneng Lifestyle Centre</a></p>
+          <p><span class="label">WhatsApp</span><a href="https://wa.me/27774152008" target="_blank" rel="noopener">077 415 2008</a></p>
+          <a class="btn btn-block" href="signin.html">Book your appointment</a>
+        </div>
+      </section>
 
-        <label for="up-email">Email</label>
-        <input id="up-email" type="email" autocomplete="username" inputmode="email" required>
-
-        <label for="up-password">Password</label>
-        <input id="up-password" type="password" autocomplete="new-password" required>
-        <small class="muted">At least 8 characters.</small>
-
-        <label for="up-confirm">Confirm password</label>
-        <input id="up-confirm" type="password" autocomplete="new-password" required>
-
-        <button type="submit" class="btn btn-block">Create account</button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="footer">Bloom Beauty Studio</footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-  <script src="config.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/index.js"></script>
+      <p class="w-foot">Bloom Beauty Studio</p>
+    </main>
+  </div>
 </body>
 </html>
